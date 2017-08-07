@@ -11,6 +11,7 @@ gem 'rails', '~> 5.1.2'
 group :production do
   # Use pg as the production database for Active Record
   gem 'pg'
+  gem 'rails_12factor'
 end
 
 group :development do
@@ -18,6 +19,9 @@ group :development do
   gem 'sqlite3'
   gem 'web-console', '~> 2.0'
   gem 'listen', '~> 3.0.5'
+end
+
+group :development, :test do
   gem 'rspec-rails', '~> 3.5'
 end
 
