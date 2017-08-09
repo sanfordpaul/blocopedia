@@ -1,2 +1,15 @@
-<h1>Wikis#edit</h1>
-<p>Find me in app/views/wikis/edit.html.erb</p>
+<%= form_for @wiki do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title, class: 'form-control', placeholder: @wiki.title %>
+  </div>
+
+  <div>
+    <%= f.label :body %>
+    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: @wiki.body %>
+  </div>
+
+  <div class="form-group">
+    <%= f.submit "Save", class: 'btn btn-success' %>
+  </div>
+<% end %>
