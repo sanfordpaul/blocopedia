@@ -3,6 +3,8 @@ include RandomData
 
 RSpec.describe WikisController, type: :controller do
 
+  let(:my_wiki) {create(:wiki)}
+
   describe "GET new" do
     it "returns http success" do
       get :new
@@ -17,6 +19,22 @@ RSpec.describe WikisController, type: :controller do
     it "instantiates @wiki" do
       get :new
       expect(assigns(:wiki)).not_to be_nil
+    end
+  end
+
+  describe "GET show" do
+    it "returns http success" do
+      get :show, params: { id: my_wiki.id }
+      expect(response).to have_http_status(:success)
+    end
+    it "renders the #show view" do
+      get :show, params: { id: my_wiki.id }
+      expect(response).to render_template :show
+    end
+
+    it "assigns my_wiki to @wiki" do
+      get :show, params: { id: my_wiki.id }
+      expect(assigns(:wiki)).to eq(my_wiki)
     end
   end
 
