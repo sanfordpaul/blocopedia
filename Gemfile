@@ -27,6 +27,7 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'pundit-matchers'
+  gem 'faker'
 end
 
 # Use Puma as the app server
