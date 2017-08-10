@@ -3,16 +3,16 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :trackable, :validatable
 
 
-  before_save { self.role ||= :member }
-  before_save { self.account ||= :standard }
+  after_initialize { self.role ||= :standard }
 
-  enum role: [:member, :admin]
-  enum account: [:standard, :premium]
+
+  enum role: [:standard, :premium, :admin]
+
 
   validates :name, length: { minimum: 1, maximum: 100 }, presence: true
 
   validates :email,
-          presence: true,
-          uniqueness: { case_sensitive: false },
-          length: { minimum: 3, maximum: 254 }
+            presence: true,
+            uniqueness: { case_sensitive: false },
+            length: { minimum: 3, maximum: 254 }
 end
