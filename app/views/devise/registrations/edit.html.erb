@@ -41,6 +41,20 @@
   </div>
 <% end %>
 
+<% if current_user.role == "standard" %>
+<h3>Upgrade My Account</h3>
+  <p>Upgrade to premium account and recieve refund</p>
+  <p>
+    <%= button_to "Upgrade my account", new_charge_path, data: { confirm: "Are you sure?" }, method: :get %>
+  </p>
+<% end %>
+<% if current_user.role == "premium" %>
+<h3>Downgrade My Account</h3>
+  <p>Return to standard account and recieve refund</p>
+  <p>
+    <%= button_to "Downgrade my account", refunds_path, data: { confirm: "Are you sure?" }, method: :post  %>
+  </p>
+<% end %>
 <h3>Cancel my account</h3>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
