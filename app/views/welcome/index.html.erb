@@ -7,11 +7,25 @@
 <div class="row">
   <div class='col-md-6'>
     <p>create as many public wikis as you want!</p>
-    <p>free plan</p>
+    <p>
+    <% unless current_user %>
+      <%= link_to "Free Plan", new_user_registration_path, class: 'btn btn-success' %>
+    <% else %>
+      free plan
+    <% end %>
+
+  </p>
   </div>
   <div class='col-md-6'>
     <p>Create private wikis!</p>
-    <p>premium plan</p>
+
+    <p>
+    <% unless current_user and (current_user.role == "premium" or current_user.role == "admin") %>
+      <%= link_to "Premium Plan", new_charge_path, class: 'btn btn-success' %>
+    <% else %>
+      Premium plan
+    <% end %>
+    </p>
   </div>
 </div>
 
