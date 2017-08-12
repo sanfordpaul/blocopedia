@@ -1,23 +1,36 @@
-<div>
-  <h1>Blocopedia: Social, Markdown Wikis</h1>
-  <p>Create and share markdown wikis</p>
-  <p>sign up</p>
+
+<div class="row justify-content-md-center">
+  <div class='col-md-6 text-center'>
+      <h1>Blocopedia: Social, Markdown Wikis</h1>
+  </div>
 </div>
 
-<div class="row">
+<div class="row justify-content-md-center">
+
+  <div class="well text-center">
+    <h3>Create and share markdown wikis</h3>
+      <%= link_to "Sign Up!", new_user_registration_path, class: 'btn btn-info' %>
+  </div>
+
+</div>
+
+
+
+
+<div class="row justify-content-md-center text-center">
   <div class='col-md-6'>
-    <p>create as many public wikis as you want!</p>
+    <p>Create Public Wikis!</p>
     <p>
     <% unless current_user %>
       <%= link_to "Free Plan", new_user_registration_path, class: 'btn btn-success' %>
     <% else %>
       free plan
     <% end %>
-
   </p>
   </div>
-  <div class='col-md-6'>
-    <p>Create private wikis!</p>
+
+  <div class='col-md-6 '>
+    <p>Create Private Wikis!</p>
 
     <p>
     <% unless current_user and (current_user.premium? or current_user.admin?) %>
@@ -29,4 +42,9 @@
   </div>
 </div>
 
-<%= link_to "View Wikis", wikis_path, class: 'btn btn-success' %>
+
+
+
+<div class="row  justify-content-md-center text-center">
+  <%= link_to "View Wikis", wikis_path, class: 'btn btn-success' %>
+</div>
