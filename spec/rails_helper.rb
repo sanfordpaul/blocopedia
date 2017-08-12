@@ -9,6 +9,9 @@ require 'rspec/rails'
 require 'factory_girl_rails'
 require "pundit/rspec"
 require 'pundit/matchers'
+
+
+
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :view

@@ -1,6 +1,7 @@
 class WikisController < ApplicationController
   def index
-    @wikis = Wiki.all
+    @public_wikis = Wiki.all_access
+    @private_wikis = Wiki.created_by(current_user).limited_access
   end
 
   def show
@@ -10,7 +11,6 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
-
     authorize @wiki
   end
 
@@ -22,7 +22,7 @@ class WikisController < ApplicationController
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     @wiki.user_id = current_user.id
-
+    @wiki.private = params[:wiki][:private]
     if @wiki.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki

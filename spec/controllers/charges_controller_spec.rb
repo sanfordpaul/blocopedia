@@ -4,7 +4,9 @@ include RandomData
 
 RSpec.describe ChargesController, type: :controller do
 
+
   let(:my_user) {create(:user)}
+
   before(:each) do
     sign_in my_user
   end
@@ -20,8 +22,8 @@ RSpec.describe ChargesController, type: :controller do
       expect(response).to render_template :new
     end
   end
-
-
+end
+=begin
   describe "POST create" do
     context "on the happy path" do
 
@@ -34,7 +36,7 @@ RSpec.describe ChargesController, type: :controller do
         post :create
         expect(response).to render_template :create
       end
-=begin
+
       it "creates a customer object" do
         expect(customer).to exist
       end
@@ -54,7 +56,7 @@ RSpec.describe ChargesController, type: :controller do
       it "renders the create view" do
         expect(response).to render_template(:create)
       end
-=end
+
     end
   end
-end
+=end

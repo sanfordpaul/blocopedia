@@ -20,8 +20,8 @@ RSpec.describe Wiki, type: :model do
   it { is_expected.to validate_length_of(:body).is_at_least(20) }
 
   describe "attributes" do
-    it "has a title, body, and user attribute" do
-      expect(wiki).to have_attributes(title: wiki.title, body: wiki.body, user: wiki.user)
+    it "have a title, body, user, and private attribute" do
+      expect(wiki).to have_attributes(title: wiki.title, body: wiki.body, user: wiki.user, private: false)
     end
   end
 end

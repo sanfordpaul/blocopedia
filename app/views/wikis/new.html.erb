@@ -5,5 +5,13 @@
   <%= f.label :body %>
   <%= f.text_area :body %>
 
+  <% if current_user.admin? || current_user.premium? %>
+    <div class="form-group">
+      <%= f.label :private, class: 'checkbox' do %>
+        <%= f.check_box :private %> Private wiki
+      <% end %>
+    </div>
+  <% end %>
+  
   <%= f.submit "Save" %>
 <% end %>

@@ -41,14 +41,14 @@
   </div>
 <% end %>
 
-<% if current_user.role == "standard" %>
+<% if current_user.standard? %>
 <h3>Upgrade My Account</h3>
   <p>Upgrade to premium account and recieve refund</p>
   <p>
     <%= button_to "Upgrade my account", new_charge_path, data: { confirm: "Are you sure?" }, method: :get %>
   </p>
 <% end %>
-<% if current_user.role == "premium" %>
+<% if current_user.premium? %>
 <h3>Downgrade My Account</h3>
   <p>Return to standard account and recieve refund</p>
   <p>

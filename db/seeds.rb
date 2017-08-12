@@ -7,12 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'random_data'
 # Create Users
-10.times do
+5.times do
   User.create!(
   name:     Faker::Name.name,
   email:    Faker::Internet.email,
   password: Faker::Internet.password(6, 12, true),
-  role: :standard
+  role: [:standard, :premium].sample
   )
 end
 
@@ -26,10 +26,10 @@ admin = User.create!(
 
 # Create a member
 member = User.create!(
-  name:     'Member User',
-  email:    'member@user.com',
+  name:     'Premium User',
+  email:    'premium@user.com',
   password: 'password',
-  role: :standard
+  role: :premium
 )
 
 users = User.all
@@ -38,8 +38,11 @@ users = User.all
   wiki = Wiki.create!(
     user:   users.sample,
     title:  Faker::StarWars.quote,
-    body:   Faker::StarWars.wookie_sentence + Faker::StarWars.quote + Faker::StarWars.vehicle
+    body:   Faker::StarWars.wookie_sentence + ' ' +Faker::StarWars.quote + ' ' + Faker::StarWars.vehicle,
+    private: [true, false].sample
   )
-
-
 end
+
+puts "Seed finished"
+puts "#{User.count} users created"
+puts "#{Wiki.count} wikis created"

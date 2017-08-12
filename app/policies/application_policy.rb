@@ -12,7 +12,11 @@ class ApplicationPolicy
 
   def show?
     scope.where(:id => record.id).exists?
-    true
+    if @record.private?
+      user.id == record.user_id or user.admin?
+    else
+      true
+    end
   end
 
   def create?
@@ -37,7 +41,7 @@ class ApplicationPolicy
 
   def destroy?
     check_logged_in
-    user.admin?
+    user.id == record.user_id or user.admin?
   end
 
   def scope
