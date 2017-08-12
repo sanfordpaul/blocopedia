@@ -10,4 +10,5 @@ class Wiki < ApplicationRecord
   scope :limited_access, -> { where(private: true) }
   scope :created_by, -> (user) {where(user: user)}
 
+  after_initialize { self.private ||= false}
 end

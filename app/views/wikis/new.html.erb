@@ -8,10 +8,11 @@
   <% if current_user.admin? || current_user.premium? %>
     <div class="form-group">
       <%= f.label :private, class: 'checkbox' do %>
-        <%= f.check_box :private %> Private wiki
+        <%= f.check_box(:private, checked: @wiki.private)  %> Private Wiki
       <% end %>
     </div>
+
   <% end %>
-  
+
   <%= f.submit "Save" %>
 <% end %>
