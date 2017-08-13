@@ -6,8 +6,9 @@
 
     <title>Blocopedia</title>
 
-    <%= stylesheet_link_tag    "application" %>
-    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+
+<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => "reload" %>
+<%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
 
     <%= csrf_meta_tags %>
   </head>
@@ -16,7 +17,7 @@
     <div class="grid-container">
       <div class="top-bar">
         <div class="top-bar-left">
-          <%= link_to 'Home', root_path, :class => '' %> 
+          <%= link_to 'Home', root_path, :class => '' %>
         </div>
         <div class="top-bar-right">
           <div class="shrink cell">

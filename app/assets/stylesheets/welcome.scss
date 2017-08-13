@@ -1,7 +1,15 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.well {
-  width: 66%;
-  margin: auto;
+
+@import 'settings';
+
+.fi-dollar {
+  font-size: 75px;
+  color: $success-color;
+}
+
+.fi-page {
+  font-size: 75px;
+  color: $success-color;
 }

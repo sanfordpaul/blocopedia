@@ -19,6 +19,7 @@
 <div class="grid-x">
   <div class='small-6 cell text-center'>
     <h3>Create Public Wikis!</h3>
+    <i class="fi-page"></i>
     <div>
       <% unless current_user %>
         <%= link_to "Free Plan", new_user_registration_path, class: 'small button' %>
@@ -30,6 +31,7 @@
 
   <div class='small-6 cell text-center'>
     <h3>Create Private Wikis!</h3>
+    <i class="fi-dollar"></i>
     <div>
       <% unless current_user and (current_user.premium? or current_user.admin?) %>
         <%= link_to "Premium Plan", new_charge_path, class: 'small button' %>

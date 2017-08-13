@@ -3,9 +3,8 @@
     <% if current_user and (current_user.premium? or current_user.admin?) %>
       <h2 class="text-centered">Private Wikis</h2>
 
-      <% @private_wikis.each do |wiki| %>
-          <p><%= link_to wiki.title, wiki %></p>
-      <% end %>
+          <%= render @private_wikis %></p>
+
     <% end %>
   </div>
 </div>
@@ -15,12 +14,15 @@
 <div class="small-12 medium-9 small-centered cell">
   <h2 class="text-center">Public Wikis</h2>
 
-  <% @public_wikis.each do |wiki| %>
-      <p><%= link_to wiki.title, wiki %></p>
-  <% end %>
+      <%= render @public_wikis %>
+
   <div class="grid-x">
     <div class="shrink small-centered cell">
-      <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
+      <% unless current_user %>
+          <span class="button disabled">Create Wiki</span>
+      <% else %>
+        <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
+      <% end %>
     </div>
   </div>
 
