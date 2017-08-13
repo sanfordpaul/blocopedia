@@ -1,28 +1,36 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>Blocopedia</title>
-    <%= csrf_meta_tags %>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-   <meta name="viewport" content="width=device-width, initial-scale=1">
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <title>Blocopedia</title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "application", 'data-turbolinks-track' => true %>
+
+    <%= csrf_meta_tags %>
   </head>
 
   <body>
-    <div class="container">
-
-      <div class="navbar-text pull-right">
-        <% if user_signed_in? %>
-          Logged in as <strong><%= current_user.name %></strong>. <%= current_user.role.capitalize %> Account
-          <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-          <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
-        <% else %>
-          <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-          <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
-        <% end %>
+    <div class="grid-container">
+      <div class="top-bar">
+        <div class="top-bar-left">
+          <%= link_to 'Home', root_path, :class => '' %> 
+        </div>
+        <div class="top-bar-right">
+          <div class="shrink cell">
+            <% if user_signed_in? %>
+              Logged in as <strong><%= current_user.name %></strong>. <%= current_user.role.capitalize %> Account
+              <%= link_to 'Edit profile', edit_user_registration_path, :class => '' %> |
+              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => ''  %>
+            <% else %>
+              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
+              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+            <% end %>
+          </div>
+        </div>
       </div>
-
       <div class="flash">
         <% if flash[:notice] %>
           <div class="alert alert-success">
@@ -38,7 +46,9 @@
       </div>
 
       <%= yield %>
-
     </div>
+
+
+
   </body>
 </html>

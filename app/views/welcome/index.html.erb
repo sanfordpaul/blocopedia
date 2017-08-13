@@ -1,50 +1,49 @@
 
-<div class="row justify-content-md-center">
-  <div class='col-md-6 text-center'>
-      <h1>Blocopedia: Social, Markdown Wikis</h1>
+<div class="grid-x">
+  <div class='small-12 medium-9 small-centered cell text-center '>
+      <h2 >Blocopedia: Social, Markdown Wikis</h2>
   </div>
 </div>
 
-<div class="row justify-content-md-center">
+<div class="grid-x">
+  <div class="small-6 small-centered cell text-center">
+    <div class="large primary callout">
+      <h3 class="">Create and share markdown wikis</h3>
+      <div class="shrink cell">
+        <%= link_to "Sign Up!", new_user_registration_path, class: 'large success button' %>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class="well text-center">
-    <h3>Create and share markdown wikis</h3>
-      <%= link_to "Sign Up!", new_user_registration_path, class: 'btn btn-info' %>
+<div class="grid-x">
+  <div class='small-6 cell text-center'>
+    <h3>Create Public Wikis!</h3>
+    <div>
+      <% unless current_user %>
+        <%= link_to "Free Plan", new_user_registration_path, class: 'small button' %>
+      <% else %>
+        free plan
+      <% end %>
+    </div>
   </div>
 
+  <div class='small-6 cell text-center'>
+    <h3>Create Private Wikis!</h3>
+    <div>
+      <% unless current_user and (current_user.premium? or current_user.admin?) %>
+        <%= link_to "Premium Plan", new_charge_path, class: 'small button' %>
+      <% else %>
+        Premium plan
+      <% end %>
+    </div>
+  </div>
 </div>
 
 
 
-
-<div class="row justify-content-md-center text-center">
-  <div class='col-md-6'>
-    <p>Create Public Wikis!</p>
-    <p>
-    <% unless current_user %>
-      <%= link_to "Free Plan", new_user_registration_path, class: 'btn btn-success' %>
-    <% else %>
-      free plan
-    <% end %>
-  </p>
+<div class="grid-x">
+  <div class="shrink small-centered cell" >
+    <%= link_to "View Wikis", wikis_path, class: 'button' %>
   </div>
-
-  <div class='col-md-6 '>
-    <p>Create Private Wikis!</p>
-
-    <p>
-    <% unless current_user and (current_user.premium? or current_user.admin?) %>
-      <%= link_to "Premium Plan", new_charge_path, class: 'btn btn-success' %>
-    <% else %>
-      Premium plan
-    <% end %>
-    </p>
-  </div>
-</div>
-
-
-
-
-<div class="row  justify-content-md-center text-center">
-  <%= link_to "View Wikis", wikis_path, class: 'btn btn-success' %>
 </div>
