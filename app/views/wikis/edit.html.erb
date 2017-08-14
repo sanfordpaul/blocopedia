@@ -1,23 +1,8 @@
-<%= form_for @wiki do |f| %>
-  <div>
-    <%= f.label :title %>
-    <%= f.text_field :title, class: 'form-control', placeholder: @wiki.title %>
-  </div>
+<div class="grid-x">
+  <div class="medium-9 large-6 medium-centered cell text-center">
+    <h1>Edit Wiki</h1>
 
-  <div>
-    <%= f.label :body %>
-    <%= f.text_area :body, rows: 8, class: 'form-control', placeholder: @wiki.body %>
-  </div>
-  <% if current_user.admin? || current_user.premium? %>
-    <div class="form-group">
-      <%= f.label :private, class: 'checkbox' do %>
-        <%= f.check_box :private %> Private Wiki
-      <% end %>
-    </div>
+     <%= render partial: 'form', locals: { wiki: @wiki } %>
 
-  <% end %>
-
-  <div class="form-group">
-    <%= f.submit "Save", class: 'btn btn-success' %>
-  </div>
-<% end %>
+   </div>
+ </div>

@@ -12,8 +12,6 @@ RSpec.describe WikisController, type: :controller do
   let(:standard_user) {create(:user)}
   let(:admin_user) {create(:user, role: :admin)}
 
-
-
   context "guest" do
     describe "GET show" do
       it "returns http success" do
@@ -72,7 +70,6 @@ RSpec.describe WikisController, type: :controller do
   end
 
   context "standard user doing CRUD on a wiki they don't own" do
-
 
     before do
       sign_in(standard_user)
@@ -311,9 +308,7 @@ RSpec.describe WikisController, type: :controller do
     end
   end
 
-
   context "standard user doing CRUD on a private wiki they own" do
-
 
     before do
       sign_in(standard_user)
@@ -395,7 +390,6 @@ RSpec.describe WikisController, type: :controller do
 
   context "standard user doing CRUD on a private wiki they don't own" do
 
-
     before do
       sign_in(standard_user)
     end
@@ -471,8 +465,6 @@ RSpec.describe WikisController, type: :controller do
       end
     end
 
-
-
     describe "GET edit" do
       it "returns http success" do
         get :edit, params: {  id: private_wiki.id }
@@ -529,6 +521,4 @@ RSpec.describe WikisController, type: :controller do
       end
     end
   end
-
-
 end

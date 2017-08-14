@@ -35,10 +35,19 @@ member = User.create!(
 users = User.all
 
 25.times do
+  fake_title = String.new
+  fake_body = String.new
+  3.times do
+    fake_title << Faker::StarWars.vehicle + " "
+  end
+  (5..10).to_a.sample.times do
+    fake_body << Faker::StarWars.quote + " "
+  end
+
   wiki = Wiki.create!(
     user:   users.sample,
-    title:  Faker::StarWars.quote,
-    body:   Faker::StarWars.wookie_sentence + ' ' +Faker::StarWars.quote + ' ' + Faker::StarWars.vehicle,
+    title:  fake_title,
+    body:   fake_body,
     private: [true, false].sample
   )
 end

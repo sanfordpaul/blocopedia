@@ -14,7 +14,7 @@
   </head>
 
   <body>
-    <div class="grid-container">
+    <div class="grid-container ">
       <div class="top-bar">
         <div class="top-bar-left">
           <%= link_to 'Home', root_path, :class => '' %>
@@ -32,24 +32,28 @@
           </div>
         </div>
       </div>
-      <div class="flash">
-        <% if flash[:notice] %>
-          <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= flash[:notice] %>
-          </div>
-        <% elsif flash[:alert] %>
-          <div class="alert alert-warning">
-            <button type="button" class="close" data-dismiss="alert">&times;</button>
-            <%= flash[:alert] %>
-          </div>
-        <% end %>
+
+      <% if flash[:notice] %>
+        <div class="success callout" data-closable>
+          <button class="close-button"  type="button" data-close>
+              <span>&times;</span>
+            </button>
+          <%= flash[:notice] %>
+        </div>
+      <% elsif flash[:alert] %>
+        <div class="alert callout" data-closable>
+          <button class="close-button" type="button" data-close>
+            <span>&times;</span>
+          </button>
+
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+
+      <div class="grid-x grid-padding-x"
+        <%= yield %>
       </div>
-
-      <%= yield %>
+      
     </div>
-
-
-
   </body>
 </html>

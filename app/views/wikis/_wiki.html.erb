@@ -1,12 +1,12 @@
-<div class="grid-x">
-  <div class="small-12 medium-10 small-centered cell">
+
     <div class="callout">
       <h4 class="text-center">
-        <%= link_to wiki.title, wikis_path(wiki) %>
+        <%= link_to wiki.title, wiki_path(wiki) %>
       </h4>
       <h6 class="subheader">
-        submitted <%= time_ago_in_words(wiki.created_at) %> ago by <%= wiki.user.name %> <br>
+        submitted <%= time_ago_in_words(wiki.created_at) %> ago by <%= wiki.user.name %>
+        <% unless wiki.created_at == wiki.updated_at %>
+          -- updated <%= time_ago_in_words(wiki.updated_at) %> ago
+        <% end %>
       </h6>
     </div>
-  </div>
- </div>
