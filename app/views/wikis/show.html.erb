@@ -1,9 +1,9 @@
 <div class="grid-x">
   <div class="small-12 medium-10 small-centered cell text-center">
-    <h2><%= @wiki.title %></h2>
+    <h2><%= markdown(@wiki.title) %></h2>
     <div class="callout text-left">
       <h3>
-        <%= @wiki.body %>
+        <%= markdown(@wiki.body) %>
       </h3>
       <h6 class="subheader">
         submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= @wiki.user.name %>
