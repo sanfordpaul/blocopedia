@@ -11,20 +11,20 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
-    authorize @wiki
+#    authorize @wiki
   end
 
   def create
-    @wiki = Wiki.new
+    @wiki = Wiki.new(params[:wiki])
 
-    authorize @wiki
+#    authorize @wiki
 
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    @wiki.user_id = current_user.id
-    if params[:wiki][:private]
-      @wiki.private = params[:wiki][:private]
-    end
+    # @wiki.title = params[:wiki][:title]
+    # @wiki.body = params[:wiki][:body]
+    # @wiki.user_id = current_user_id
+    # if params[:wiki][:private]
+    #   @wiki.private = params[:wiki][:private]
+    # end
     if @wiki.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki

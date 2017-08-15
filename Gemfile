@@ -28,6 +28,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pundit-matchers'
   gem 'faker'
+  gem 'byebug'
 end
 
 # Use Puma as the app server

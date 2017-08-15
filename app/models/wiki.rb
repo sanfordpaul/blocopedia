@@ -1,9 +1,10 @@
 class Wiki < ApplicationRecord
-  belongs_to :user
+  has_many :users, through: :collaborations
+  has_many :collaborations
 
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
-  validates :user, presence: true
+  validates :user_id, presence: true
   validates :private, inclusion: { in: [true, false] }
 
   scope :all_access, -> { where(private: false) }
@@ -11,4 +12,6 @@ class Wiki < ApplicationRecord
   scope :created_by, -> (user) {where(user: user)}
 
   after_initialize { self.private ||= false}
+
+  attr_accessor :user
 end

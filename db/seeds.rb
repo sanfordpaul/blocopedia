@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'random_data'
+
 # Create Users
 5.times do
   User.create!(
@@ -43,15 +44,25 @@ users = User.all
   (5..10).to_a.sample.times do
     fake_body << Faker::StarWars.quote + " "
   end
+  user = users.sample
 
-  wiki = Wiki.create!(
-    user:   users.sample,
+  Wiki.create!(
+    user_id: user.id,
     title:  fake_title,
     body:   fake_body,
     private: [true, false].sample
   )
+
+wikis = Wiki.all
+
+  Collaboration.create!(
+  user: users.sample,
+  wiki: wikis.sample
+  )
+
 end
 
 puts "Seed finished"
 puts "#{User.count} users created"
 puts "#{Wiki.count} wikis created"
+puts "#{Collaboration.count} collaborations created"
