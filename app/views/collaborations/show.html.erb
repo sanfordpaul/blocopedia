@@ -6,22 +6,25 @@
 
 <div class="grid-x">
   <div class="small-8 small-centered cell">
-    <h5>Check all collaborators</h5>
+    <h5>Uncheck to remove collaborators</h5>
     <%= form_tag(update_collaborations_for_wiki_path, method: "patch") do %>
       <% Collaboration.where(wiki_id: @wiki.id).each do |collaboration| %>
         <div class="form-group">
-              <%= check_box_tag 'collaboration[user_id_array][]', collaboration.user_id %>
+              <%= check_box_tag 'collaboration[user_id_array][]', collaboration.user_id, true  %>
               <%= label_tag :collaboration, "#{User.find(collaboration.user_id).name}"%>
         </div>
       <% end %>
 
 
       <h5 >Add a collaborator</h5>
+
       <div class="grid-x">
-        <div class="auto cell">
-          <%= text_field_tag :email, nil, placeholder: "Enter email address" %>
+        <div class="auto cell input_fields_wrap">
+          <%= text_field_tag "email[]", nil, placeholder: "Enter email address" %>
         </div>
       </div>
+
+      <button class="add_field_button small hollow button">Add More Collaborators</button>
 
       <div class="grid-x">
         <div class="shrink small-centered cell">
