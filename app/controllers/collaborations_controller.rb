@@ -46,21 +46,43 @@ class CollaborationsController < ApplicationController
   # PATCH/PUT /collaborations/1
   # PATCH/PUT /collaborations/1.json
   def update
+
     collaborations = Collaboration.where(wiki_id: params[:id])
     collaborations.each do |collaboration|
       collaboration.destroy!
     end
 
-    params[:collaboration][:user_id_array].each do |user_id|
-      collaboration = Collaboration.new(
-      user_id: user_id,
-      wiki_id: params[:id]
-      )
-      if collaboration.save!
-        flash[:notice] = "collaborations updated"
+    params[:email].each do |user_email|
+      unless user_email.empty?
+        if User.all.include?(User.find_by(email: user_email))
+          user_id = User.find_by(email: user_email).id
+          collaboration = Collaboration.new(
+          user_id: user_id,
+          wiki_id: params[:id]
+          )
+
+          if collaboration.save!
+
+          else
+            flash[:alert] = "collaboration save failed"
+          end
+        else
+          flash[:alert] = "#{user_email} is not a valid email"
+        end
       end
     end
-    redirect_to edit_wiki_path(params[:id])
+    if params[:collaboration]
+      params[:collaboration][:user_id_array].each do |user_id|
+        collaboration = Collaboration.new(
+        user_id: user_id,
+        wiki_id: params[:id]
+        )
+        if collaboration.save!
+
+        end
+      end
+    end
+    redirect_to show_collaborations_for_wiki_path(params[:id])
   end
   # DELETE /collaborations/1
   # DELETE /collaborations/1.json
