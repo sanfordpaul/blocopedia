@@ -4,5 +4,10 @@
 
      <%= render partial: 'form', locals: { wiki: @wiki } %>
 
-   </div>
- </div>
+  </div>
+</div>
+<div class="grid-x">
+  <div class="shrink small-centered cell">
+      <%= link_to "Edit Collaborators", show_collaborations_for_wiki_path, class: "success button" %>
+  </div>
+</div>

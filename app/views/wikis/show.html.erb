@@ -6,7 +6,7 @@
         <%= markdown(@wiki.body) %>
       </h3>
       <h6 class="subheader">
-        submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= @wiki.user.name %>
+        submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= User.find(@wiki.user_id).name %>
         <% unless @wiki.created_at == @wiki.updated_at %>
           -- updated <%= time_ago_in_words(@wiki.updated_at) %> ago
         <% end %>

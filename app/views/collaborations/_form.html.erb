@@ -1,17 +1,13 @@
-<%= form_with(model: collaboration, local: true) do |form| %>
-  <% if collaboration.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(collaboration.errors.count, "error") %> prohibited this collaboration from being saved:</h2>
 
-      <ul>
-      <% collaboration.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+<%= form_tag(update_collaborations_for_wiki_path, method: "patch") do %>
+  <% Collaboration.where(wiki_id: @wiki.id).each do |collaboration| %>
+    <div class="grid-x">
+      <div class="small-4 cell">
+        <div class="form-group">
+              <%= check_box_tag 'collaboration[user_id_array][]', collaboration.user_id %>
+              <%= label_tag :collaboration, "#{User.find(collaboration.user_id).name}"%>
+        </div>
+      </div>
     </div>
   <% end %>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
 <% end %>

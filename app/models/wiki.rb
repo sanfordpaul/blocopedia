@@ -9,7 +9,7 @@ class Wiki < ApplicationRecord
 
   scope :all_access, -> { where(private: false) }
   scope :limited_access, -> { where(private: true) }
-  scope :created_by, -> (user) {where(user: user)}
+  scope :created_by, -> (user_id) {where(user_id: user_id)}
 
   after_initialize { self.private ||= false}
 

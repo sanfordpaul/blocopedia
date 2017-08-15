@@ -5,11 +5,13 @@ class CollaborationsController < ApplicationController
   # GET /collaborations.json
   def index
     @collaborations = Collaboration.all
+
   end
 
   # GET /collaborations/1
   # GET /collaborations/1.json
   def show
+    @wiki = Wiki.find(params[:id])
   end
 
   # GET /collaborations/new
@@ -19,6 +21,8 @@ class CollaborationsController < ApplicationController
 
   # GET /collaborations/1/edit
   def edit
+#    @collaboration = Collaboration.find(params[:id])
+
   end
 
   # POST /collaborations
@@ -42,17 +46,22 @@ class CollaborationsController < ApplicationController
   # PATCH/PUT /collaborations/1
   # PATCH/PUT /collaborations/1.json
   def update
-    respond_to do |format|
-      if @collaboration.update(collaboration_params)
-        format.html { redirect_to @collaboration, notice: 'Collaboration was successfully updated.' }
-        format.json { render :show, status: :ok, location: @collaboration }
-      else
-        format.html { render :edit }
-        format.json { render json: @collaboration.errors, status: :unprocessable_entity }
+    collaborations = Collaboration.where(wiki_id: params[:id])
+    collaborations.each do |collaboration|
+      collaboration.destroy!
+    end
+
+    params[:collaboration][:user_id_array].each do |user_id|
+      collaboration = Collaboration.new(
+      user_id: user_id,
+      wiki_id: params[:id]
+      )
+      if collaboration.save!
+        flash[:notice] = "collaborations updated"
       end
     end
+    redirect_to edit_wiki_path(params[:id])
   end
-
   # DELETE /collaborations/1
   # DELETE /collaborations/1.json
   def destroy

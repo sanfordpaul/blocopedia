@@ -1,7 +1,7 @@
 class WikisController < ApplicationController
   def index
     @public_wikis = Wiki.all_access
-    @private_wikis = Wiki.created_by(current_user).limited_access
+    @private_wikis = Wiki.created_by(current_user.id).limited_access
   end
 
   def show

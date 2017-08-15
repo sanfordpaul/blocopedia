@@ -1,4 +1,33 @@
-<p id="notice"><%= notice %></p>
+<div class="grid-x">
+  <div class="small-8 small-centered cell text-center">
+    <h3><%= "Edit Collaborators for #{@wiki.title}" %></h3>
+  </div>
+</div>
 
-<%= link_to 'Edit', edit_collaboration_path(@collaboration) %> |
-<%= link_to 'Back', collaborations_path %>
+<div class="grid-x">
+  <div class="small-8 small-centered cell">
+    <h5>Check all collaborators</h5>
+    <%= form_tag(update_collaborations_for_wiki_path, method: "patch") do %>
+      <% Collaboration.where(wiki_id: @wiki.id).each do |collaboration| %>
+        <div class="form-group">
+              <%= check_box_tag 'collaboration[user_id_array][]', collaboration.user_id %>
+              <%= label_tag :collaboration, "#{User.find(collaboration.user_id).name}"%>
+        </div>
+      <% end %>
+
+
+      <h5 >Add a collaborator</h5>
+      <div class="grid-x">
+        <div class="auto cell">
+          <%= text_field_tag :email, nil, placeholder: "Enter email address" %>
+        </div>
+      </div>
+
+      <div class="grid-x">
+        <div class="shrink small-centered cell">
+          <%= submit_tag "Save", class: 'success button' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
