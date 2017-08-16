@@ -8,8 +8,8 @@
 </div>
 <div class="grid-x">
   <div class="shrink small-centered cell">
-      <% if current_user.admin? || @wiki.user_id == current_user.id %>
-        <%= link_to "Edit Collaborators", show_collaborations_for_wiki_path, class: "success button" %>
+      <% if (current_user.admin? || @wiki.user_id == current_user.id) and !current_user.standard? %>
+        <%= link_to "Edit Collaborators", show_collaborations_for_wiki_path, class: "small button" %>
       <% else %>
         <span class="disabled button">Edit Collaborators</span>
       <% end %>

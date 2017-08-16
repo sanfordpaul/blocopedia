@@ -7,6 +7,22 @@ class ApplicationPolicy
   end
 
 
+  def index?
+    false
+  end
+
+  def show?
+    scope.where(:id => record.id).exists?
+  end
+
+  def create?
+    false
+  end
+
+  def new?
+    create?
+  end
+
 
   class Scope
     attr_reader :user, :scope

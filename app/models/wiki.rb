@@ -16,5 +16,5 @@ class Wiki < ApplicationRecord
   after_initialize { self.private ||= false}
 
   attr_accessor :user
-  attr_accessor :collaborations
+  
 end
