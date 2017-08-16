@@ -1,5 +1,5 @@
 <div class="grid-x">
-  <div class="medium-9 large-6 medium-centered cell text-center">
+  <div class="medium-8 medium-centered cell text-center">
     <h1>Edit Wiki</h1>
 
      <%= render partial: 'form', locals: { wiki: @wiki } %>
@@ -8,6 +8,10 @@
 </div>
 <div class="grid-x">
   <div class="shrink small-centered cell">
-      <%= link_to "Edit Collaborators", show_collaborations_for_wiki_path, class: "success button" %>
+      <% if current_user.admin? || @wiki.user_id == current_user.id %>
+        <%= link_to "Edit Collaborators", show_collaborations_for_wiki_path, class: "success button" %>
+      <% else %>
+        <span class="disabled button">Edit Collaborators</span>
+      <% end %>
   </div>
 </div>

@@ -1,10 +1,10 @@
 <div class="grid-x">
-  <div class="small-12 medium-10 small-centered cell text-center">
-    <h2><%= markdown(@wiki.title) %></h2>
+  <div class=" medium-8 small-centered cell text-center">
+    <h4><%= markdown(@wiki.title) %></h4>
     <div class="callout text-left">
-      <h3>
+      <h5>
         <%= markdown(@wiki.body) %>
-      </h3>
+      </h5>
       <h6 class="subheader">
         submitted <%= time_ago_in_words(@wiki.created_at) %> ago by <%= User.find(@wiki.user_id).name %>
         <% unless @wiki.created_at == @wiki.updated_at %>
@@ -17,7 +17,17 @@
 
 <div class="grid-x">
   <div class="shrink small-centered cell">
-    <%= link_to "Edit Wiki", edit_wiki_path, class: 'success button' %>
-    <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'danger button', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
+    <% if current_user && (current_user.admin? || current_user.id == @wiki.user_id || @wiki.users.include?(current_user)) %>
+      <%= link_to "Edit Wiki", edit_wiki_path, class: 'success button' %>
+    <% else %>
+      <span class="disabled success button">Edit Wiki</span>
+    <% end %>
+
+    <% if current_user && (current_user.admin? || current_user.id == @wiki.user_id) %>
+      <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'alert button', data: { confirm: 'Are you sure you want to delete this wiki?' } %>
+    <% else %>
+      <span class="disabled alert button">Delete Wiki</span>
+    <% end %>
+
   </div>
 </div>

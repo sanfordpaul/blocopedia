@@ -32,5 +32,9 @@
         </div>
       </div>
     <% end %>
+
+    <% User.all.each do |user| %>
+      <%= render partial: 'users/user', locals: { user: user } %>
+    <% end %>
   </div>
 </div>

@@ -1,7 +1,23 @@
 class WikisController < ApplicationController
   def index
+
     @public_wikis = Wiki.all_access
-    @private_wikis = Wiki.created_by(current_user.id).limited_access
+    @all_private_wikis = Wiki.limited_access
+    @my_private_wikis = []
+
+    @collaboration_wikis = []
+
+    if current_user.present?
+      @my_private_wikis = Wiki.created_by(current_user.id).limited_access
+      collaborations = Collaboration.where(user_id: current_user.id)
+      collaborations.each do |collaboration|
+        @collaboration_wikis << Wiki.find(collaboration.wiki_id)
+      end
+    end
+
+
+
+
   end
 
   def show
@@ -11,20 +27,23 @@ class WikisController < ApplicationController
 
   def new
     @wiki = Wiki.new
-#    authorize @wiki
+    authorize @wiki
   end
 
   def create
-    @wiki = Wiki.new(params[:wiki])
+    @wiki = Wiki.new
+    authorize @wiki
 
-#    authorize @wiki
+    @wiki.title = params[:wiki][:title]
+    @wiki.body = params[:wiki][:body]
+    @wiki.user_id = current_user.id
+    if params[:wiki][:private]
+     @wiki.private = params[:wiki][:private]
+    end
 
-    # @wiki.title = params[:wiki][:title]
-    # @wiki.body = params[:wiki][:body]
-    # @wiki.user_id = current_user_id
-    # if params[:wiki][:private]
-    #   @wiki.private = params[:wiki][:private]
-    # end
+
+
+
     if @wiki.save
       flash[:notice] = "Wiki was saved."
       redirect_to @wiki

@@ -1,35 +1,89 @@
+<% if current_user and current_user.admin? %>
+  <div class="grid-x">
+    <div class="medium-9 small-centered cell">
+
+        <h2 class="text-center">My Private Wikis</h2>
+
+        <%= render @my_private_wikis %></p>
+    </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="shrink small-centered cell">
+      <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
+    </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="medium-9 small-centered cell">
+
+        <h2 class="text-center">All Private Wikis</h2>
+
+        <%= render @all_private_wikis %></p>
+    </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="shrink small-centered cell">
+      <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
+    </div>
+  </div>
+
+<% end %>
+
+<% if current_user and current_user.premium? and !@my_private_wikis.empty? %>
+  <div class="grid-x">
+    <div class="medium-9 small-centered cell">
+
+        <h2 class="text-center">My Private Wikis</h2>
+
+        <%= render @my_private_wikis %></p>
+    </div>
+  </div>
+
+  <div class="grid-x">
+    <div class="shrink small-centered cell">
+      <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
+    </div>
+  </div>
+
+<% end %>
+
+<% if current_user && !Collaboration.where(user_id: current_user.id).empty? %>
+  <div class="grid-x">
+    <div class="medium-9 small-centered cell">
+
+      <h2 class="text-center">Collaboration Wikis</h2>
+
+      <%= render @collaboration_wikis %>
+
+    </div>
+  </div>
+
+  <div class="grid-x">
+      <div class="shrink small-centered cell">
+        <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
+      </div>
+  </div>
+
+<% end %>
 
 <div class="grid-x">
-  <div class="small-12 medium-9 small-centered cell">
-    <% if current_user and (current_user.premium? or current_user.admin?) %>
-      <h2 class="text-center">Private Wikis</h2>
-
-          <%= render @private_wikis %></p>
-
-    <% end %>
-
-    <div class="grid-x">
-      <div class="shrink small-centered cell">
-        <% unless current_user %>
-            <span class="button disabled">Create Wiki</span>
-        <% else %>
-          <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
-        <% end %>
-      </div>
-    </div>
+  <div class="medium-9 small-centered cell">
 
     <h2 class="text-center">Public Wikis</h2>
 
-      <%= render @public_wikis %>
+    <%= render @public_wikis %>
+
   </div>
 </div>
 
 <div class="grid-x">
   <div class="shrink small-centered cell">
-    <% unless current_user %>
-        <span class="button disabled">Create Wiki</span>
-    <% else %>
+    <% if current_user %>
       <%= link_to "Create Wiki", new_wiki_path, class: 'button' %>
+    <% else %>
+      <span class="button disabled">Create Wiki</span>
     <% end %>
   </div>
 </div>

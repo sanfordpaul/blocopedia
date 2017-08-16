@@ -1,5 +1,5 @@
 class CollaborationsController < ApplicationController
-  before_action :set_collaboration, only: [:show, :edit, :update, :destroy]
+#  before_action :set_collaboration, only: [:show, :edit, :update, :destroy]
 
   # GET /collaborations
   # GET /collaborations.json
