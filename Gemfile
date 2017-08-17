@@ -27,7 +27,6 @@ group :development, :test do
   gem 'shoulda'
   gem 'factory_girl_rails'
   gem 'pundit-matchers'
-  gem 'faker'
   gem 'byebug'
 end
 
@@ -60,3 +59,5 @@ gem 'stripe'
 gem 'figaro'
 
 gem 'redcarpet'
+
+gem 'faker'
